@@ -11,9 +11,9 @@ import (
 func main() {
 	app := fiber.New()
 
-	models.Connect()
+	db := models.Connect();
 
-	routes.TodoRoute(app)
+	routes.TodoRoute(app, db)
 
 	log.Fatal(app.Listen(":3000"))
 }

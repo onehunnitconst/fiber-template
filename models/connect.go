@@ -5,18 +5,14 @@ import (
 	"gorm.io/driver/sqlite"
 )
 
-var Database *gorm.DB
-
-func Connect() error {
-	var err error
-
-	Database, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{})
+func Connect() *gorm.DB {
+	db, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{})
 
 	if err != nil {
 		panic(err)
 	}
 	
-	Database.AutoMigrate(&Todo{})
+	db.AutoMigrate(&Todo{})
 
-	return nil;
+	return db;
 }
